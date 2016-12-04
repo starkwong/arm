@@ -1,0 +1,125 @@
+//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ generated include file.
+// Used by ARM.rc
+//
+#define IDM_ABOUTBOX                    0x0010
+#define IDD_ABOUTBOX                    100
+#define IDP_OLE_INIT_FAILED             100
+#define IDS_ABOUTBOX                    101
+#define IDD_ARM_DIALOG                  102
+#define IDR_MAINFRAME                   128
+#define IDD_LOADING                     129
+#define IDR_MAINMENU                    131
+#define IDR_POPUP                       132
+#define IDD_PROPERTIES_SECTION_GENERAL  134
+#define IDD_PREVIEW                     135
+#define IDD_SETUP_SECTION_GENERAL       136
+#define IDD_NEWFILES                    138
+#define IDS_CAT_1                       200
+#define IDS_CAT_2                       201
+#define IDS_CAT_3                       202
+#define IDS_CAT_4                       203
+#define IDS_CAT_5                       204
+#define IDS_CAT_6                       205
+#define IDS_FILEINFO                    300
+#define IDS_ENABLED                     301
+#define IDS_DISABLED                    302
+#define IDS_MM2ERROR                    303
+#define IDS_MM2COMPLETED                304
+#define IDS_MM2RUNNING                  305
+#define IDS_FAILLAUNCH                  306
+#define IDS_SETTINGS                    307
+#define IDS_FAILSWITCH                  308
+#define IDS_SELLISTFILTER               309
+#define IDS_PROPERTIES                  310
+#define IDS_INVALIDMM2PATH              311
+#define IDS_INVALIDBAKPATH              312
+#define IDS_LOADING                     313
+#define IDS_DUPCONTENT                  314
+#define IDS_DUPTITLE                    315
+#define IDS_SKIPCONTENT                 316
+#define IDS_SKIPTITLE                   317
+#define IDS_BYTES                       318
+#define IDS_ERRORPATH                   319
+#define IDS_FAILDELETE                  320
+#define IDS_NOTAVAIL                    321
+#define IDS_PLUGININFO                  322
+#define IDS_INVALIDDROPFILE             400
+#define IDS_DROPFILEEXIST               401
+#define IDS_COPYFILE                    402
+#define IDS_ERRORCOPYFILE               402
+#define IDC_FILELIST                    1000
+#define IDC_PROGRESS                    1003
+#define IDC_LOADINGLABEL                1005
+#define IDC_PREVIEW                     1007
+#define IDC_FRAME                       1008
+#define IDC_FILEINFO                    1012
+#define IDC_TAB                         1013
+#define IDC_PROP_DESC                   1014
+#define IDC_PROP_VARIATIONS             1015
+#define IDC_PROP_FILENAME               1016
+#define IDC_PROP_LOCATION               1017
+#define IDC_PROP_FILETYPE               1018
+#define IDC_PROP_FILESIZE               1019
+#define IDC_PROP_UNCOMPRESSED           1020
+#define IDC_PROP_MODIFIED               1021
+#define IDC_PROP_FILELIST               1022
+#define IDC_PROP_PREVIEW                1023
+#define IDC_SET_MM2PATH                 1024
+#define IDC_SET_BROWSE1                 1025
+#define IDC_SET_BAKPATH                 1026
+#define IDC_SET_RECYCLE                 1026
+#define IDC_SET_BROWSE2                 1027
+#define IDC_SET_MINIMIZE                1027
+#define IDC_SET_NOYIKES                 1028
+#define IDC_SET_BROWSE3                 1028
+#define IDC_SET_DEFAULT                 1028
+#define IDC_SET_ARGS                    1029
+#define IDC_SET_NOTIFYCRASH             1030
+#define IDC_ACK                         1031
+#define IDC_VERSION                     1032
+#define IDC_INFOICON                    1033
+#define IDC_DETAILS                     1034
+#define IDC_NEWFILELIST                 1035
+#define IDC_FOUND                       1036
+#define IDD_PROPERTIES_FILES            1111
+#define IDD_SETUP_OPTIONS               1112
+#define ID_FILE_LAUNCHMM2               32000
+#define ID_FILE_OPENMM2FOLDER           32001
+#define ID_FILE_EXPORTARLIST            32002
+#define ID_FILE_SETTINGS                32003
+#define ID_FILE_EXIT                    32004
+#define ID_LIST_LOADSELECTIONLIST       32100
+#define ID_LIST_SAVECATEGORYSELECTIONLIST 32101
+#define ID_LIST_SAVEALLSELECTIONLIST    32102
+#define ID_LIST_CURRENTCATEGORY         32103
+#define ID_LIST_ALLITEMS                32104
+#define ID_LIST_REFRESH                 32105
+#define ID_LIST_REBUILDPLUGINLIST       32106
+#define ID_CURRENTCATEGORY_SELECTALL    32110
+#define ID_CURRENTCATEGORY_SELECTNONE   32111
+#define ID_CURRENTCATEGORY_INVERTSELECTION 32112
+#define ID_ALLITEMS_SELECTALL           32120
+#define ID_ALLITEMS_SELECTNONE          32121
+#define ID_ALLITEMS_INVERTSELECTION     32122
+#define ID_HELP_VISITHKBF               32200
+#define ID_HELP_CHECKFORUPDATES         32201
+#define ID_HELP_ABOUTARMADNESS          32202
+#define ID_PLUGINS                      32300
+#define ID_PLUGINS_MANAGE               32301
+#define ID_POPUP_OPEN                   32700
+#define ID_POPUP_BROWSE                 32701
+#define ID_POPUP_RENAME                 32702
+#define ID_POPUP_DELETE                 32703
+#define ID_POPUP_PROPERTIES             32704
+
+// Next default values for new objects
+// 
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+#define _APS_NEXT_RESOURCE_VALUE        139
+#define _APS_NEXT_COMMAND_VALUE         32808
+#define _APS_NEXT_CONTROL_VALUE         1037
+#define _APS_NEXT_SYMED_VALUE           104
+#endif
+#endif

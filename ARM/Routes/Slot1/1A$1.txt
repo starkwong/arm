@@ -1,0 +1,16 @@
+FY2206
+http://starkwong.uhome.net/nextstop
+01,01.mp3,  新法書院,,   NEW METHOD|    COLLEGE,,,
+02,02.mp3,  拔萃男校,, DIOCESAN BOYS|     SCHOOL,,,
+03,03.mp3,  協和小學,,    HEEP WOH|   SEC. SCHOOL,,,
+04,04.mp3, 太子地鐵站,, PRINCE EDWARD|  MTR STATION,5,,
+05,05.mp3, 旺角地鐵站,,    MONG KOK|  MTR STATION,5,,
+06,06.mp3,  信和中心,3.5,  SINO CENTRE,,,
+07,07.mp3,油麻地地鐵站,,   YAU MA TEI|  MTR STATION,5,,
+08,08.mp3, 明愛白英奇,, CARITAS BIANCHI|     LODGE,4.5,,
+09,09.mp3,  大華戲院,,MAJESTIC CINEMA,,,
+10,10.mp3,  恆豐中心,,   PRUDENTIAL|     CENTRE,,,
+11,11.mp3,  九龍公園,,  KOWLOON PARK,,,
+12,12.mp3, 喜來登酒店,, SHARATON HOTEL,,,
+13,13.mp3, 尖沙咀總站,5, TSIM SHA TSUI|  BUS TERMINUS,4.5,,
+14,14.mp3,  巴士總站>  多謝乘搭,8.5,  BUS TERMINUS> THANK YOU FOR|   TRAVELLING,9,,8.5

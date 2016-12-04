@@ -1,0 +1,28 @@
+// ARM.idl : ARM.exe 的型別程式庫來源
+
+// MIDL 編譯器處理此檔案以產生型別程式庫 (ARM.tlb)。
+
+[ uuid(1186C0A3-012B-4BBF-9336-19A8F8983E64), version(1.0) ]
+library ARM
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	// CARMDoc 的主要分派介面
+	
+	[ uuid(B097B5D8-7DB9-482A-B63E-F28F07A53CBE) ]
+	dispinterface IARM
+	{
+		properties:
+			
+		methods:
+	};
+
+	// CARMDoc 的類別資訊
+	
+	[ uuid(6900BA26-3E90-44B6-8C37-F1F2049FEAF7) ]
+	coclass ARM
+	{
+		[default] dispinterface IARM;
+	};
+};

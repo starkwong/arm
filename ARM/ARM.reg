@@ -1,0 +1,14 @@
+REGEDIT
+; 您的安裝程式會使用此 .REG 檔。如果無法使用安裝程式，
+; 會使用對CWinApp::RegisterShellFileTypes 與
+; COleObjectFactory::UpdateRegistryAll 的呼叫來自動在
+; 您的 InitInstance 登錄下列項目。
+
+HKEY_CLASSES_ROOT\ARM.Application = ARM Application
+HKEY_CLASSES_ROOT\ARM.Application\CLSID = {6900BA26-3E90-44B6-8C37-F1F2049FEAF7}
+
+HKEY_CLASSES_ROOT\CLSID\{6900BA26-3E90-44B6-8C37-F1F2049FEAF7} = ARM Application
+HKEY_CLASSES_ROOT\CLSID\{6900BA26-3E90-44B6-8C37-F1F2049FEAF7}\ProgId = ARM.Application
+
+
+HKEY_CLASSES_ROOT\CLSID\{6900BA26-3E90-44B6-8C37-F1F2049FEAF7}\LocalServer32 = ARM.EXE

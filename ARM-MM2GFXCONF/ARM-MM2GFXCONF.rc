@@ -1,0 +1,270 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// íÜçëåÍ (ë‰òp) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
+#pragma code_page(950)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,1,1,0
+ PRODUCTVERSION 1,1,1,0
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040404b0"
+        BEGIN
+            VALUE "CompanyName", "Studio KUMA §p∫µ§uß@´«"
+            VALUE "FileDescription", "AR Madness 2 ≥¯Ø∏æ˜ªy≠µ¥°•Û"
+            VALUE "FileVersion", "1, 1, 1, 0"
+            VALUE "InternalName", "ARM-SOUN"
+            VALUE "LegalCopyright", "™©≈v©“¶≥(C) 2007 §p∫µ§uß@´«°C´OØd©“¶≥≈vßQ°C"
+            VALUE "OriginalFilename", "ARM-SOUN.dll"
+            VALUE "ProductName", "AR Madness 2"
+            VALUE "ProductVersion", "1, 1, 1, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x404, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOGEX 0, 0, 338, 207
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Midtown Madness 2 GFXCONF.DAT ≥]∏mµ{¶°"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "¿x¶s(&S)",IDOK,218,174,50,14
+    PUSHBUTTON      "√ˆ≥¨",IDCANCEL,280,174,50,14
+    LTEXT           "≈„•‹∏À∏m(&A)°G",IDC_STATIC,7,7,143,8
+    COMBOBOX        IDC_COMBO1,7,18,143,100,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "º“¶°(&M)°G",IDC_STATIC,7,36,143,8
+    LISTBOX         IDC_LIST1,7,48,143,140,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "•ﬂ≈È•[≥t§‰¥©ºhØ≈°G",IDC_STATIC,156,7,174,8
+    LTEXT           "§‰¥©(&U)°G",IDC_STATIC,156,18,40,8
+    COMBOBOX        IDC_COMBO2,198,18,42,100,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO3,288,18,42,100,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "•ÿ´e(&C)°G",IDC_STATIC,246,18,40,8
+    LTEXT           "∏Í∞T°G",IDC_STATIC,156,36,84,8
+    PUSHBUTTON      "∞ª¥˙(&P)",IDYES,156,174,50,14
+    EDITTEXT        IDC_EDIT1,156,48,174,120,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER,WS_EX_TRANSPARENT
+    CTEXT           "* ¶b≥o∏Ã©“øÔæ‹™∫≈„•‹º“¶°§]∑|¶b Midtown Madness 2 ∏Ã≥QøÔæ‹ *",IDC_STATIC,7,192,324,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 331
+        VERTGUIDE, 150
+        VERTGUIDE, 156
+        VERTGUIDE, 198
+        VERTGUIDE, 240
+        VERTGUIDE, 246
+        VERTGUIDE, 288
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 200
+        HORZGUIDE, 18
+        HORZGUIDE, 36
+        HORZGUIDE, 48
+        HORZGUIDE, 168
+        HORZGUIDE, 174
+        HORZGUIDE, 192
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_MENUITEM            "ΩsøË GFXCONF.DAT"
+    IDS_GUID                "∏À∏m GUID°G"
+    IDS_VEN                 "ºt∞” ID°G"
+    IDS_DEV                 "∏À∏m ID°G"
+    IDS_UNKNOWN             "§£©˙∏ÍÆ∆°G"
+    IDS_SAVE_OK             "¿…Æ◊¶®•\¿x¶s°C"
+    IDS_SAVE_ERROR          "¿x¶s GFXCONF.DAT •¢±—°C"
+    IDS_OPEN_ERROR          "µL™k∂}±“ GFXCONF.DAT ∂i¶Ê≈™®˙°C"
+    IDS_OPEN_BADHEADER      "¿…Æ◊º–¿Y§£•øΩT°C"
+END
+
+#endif    // íÜçëåÍ (ë‰òp) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// âpåÍ (ïƒçë) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG1 DIALOGEX 0, 0, 338, 207
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Midtown Madness 2 GFXCONF.DAT Configurator"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "&Save",IDOK,218,174,50,14
+    PUSHBUTTON      "Close",IDCANCEL,280,174,50,14
+    LTEXT           "Display &Adapters:",IDC_STATIC,7,7,143,8
+    COMBOBOX        IDC_COMBO1,7,18,143,100,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Modes:",IDC_STATIC,7,36,143,8
+    LISTBOX         IDC_LIST1,7,48,143,140,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "3D Support Level:",IDC_STATIC,156,7,174,8
+    LTEXT           "S&upported:",IDC_STATIC,156,18,38,8
+    COMBOBOX        IDC_COMBO2,198,18,42,100,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO3,288,18,42,100,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "&Current:",IDC_STATIC,246,18,40,8
+    LTEXT           "Information:",IDC_STATIC,156,36,84,8
+    PUSHBUTTON      "&Probe",IDYES,156,174,50,14
+    EDITTEXT        IDC_EDIT1,156,48,174,120,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | NOT WS_BORDER,WS_EX_TRANSPARENT
+    CTEXT           "* Display Mode selected here will also be selected in Midtown Madness 2 *",IDC_STATIC,7,192,324,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 331
+        VERTGUIDE, 150
+        VERTGUIDE, 156
+        VERTGUIDE, 198
+        VERTGUIDE, 240
+        VERTGUIDE, 246
+        VERTGUIDE, 288
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 200
+        HORZGUIDE, 18
+        HORZGUIDE, 36
+        HORZGUIDE, 48
+        HORZGUIDE, 168
+        HORZGUIDE, 174
+        HORZGUIDE, 192
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_MENUITEM            "Edit GFXCONF.DAT"
+    IDS_GUID                "Device GUID:"
+    IDS_VEN                 "Vendor ID:"
+    IDS_DEV                 "Device ID:"
+    IDS_UNKNOWN             "Unknown:"
+    IDS_SAVE_OK             "File Saved Successfully."
+    IDS_SAVE_ERROR          "Failed Saving GFXCONF.DAT."
+    IDS_OPEN_ERROR          "Unable to open GFXCONF.DAT for reading."
+    IDS_OPEN_BADHEADER      "Bad File Header."
+END
+
+#endif    // âpåÍ (ïƒçë) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

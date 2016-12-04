@@ -1,0 +1,11 @@
+; ARM-BSASLT.def : 宣告 DLL 的模組參數。
+
+LIBRARY      "ARM-BSASLT"
+
+EXPORTS
+    ; 外顯匯出方法可置於此
+	GetPluginInfo
+	PluginLoad
+	PluginUnload
+	ModulesLoaded
+	
