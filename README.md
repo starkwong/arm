@@ -24,3 +24,7 @@ Apart from the main **ARM** project, the following plugins are available to ARM:
 * **ARM-MM2GfxConf**: Change MM2 graphics configurations outside the game.
 * **ARM-IMON**: SoundGraph iMON VFD support for display console contents are current English stop name.
 * **ARM-OMSI**: PoC OMSI support, it works but with a side effect of content get reflected by side mirror.
+
+### License
+
+ARM is licensed via GNU Public License, version 2.
