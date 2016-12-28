@@ -12,7 +12,7 @@ AR Madness is written with Visual Studio 2005 with MFC. Plugins are communicated
 
 ### Plugins
 
-Apart from the main **ARM** project, the following plugins are available to ARM:
+Apart from the main **ARM** project, the following plugins are available to ARM (When compiled, DLL binaries will be placed in ..\test\Plugins folder):
 
 * **ARM-BSASLT**: The core to the BM-2000-KMB3 simulation. It provides I/O to other input and output plugins.
 * **ARM-BSASConsole**: The console device simulator (UI) to BM-2000-KMB3. User commands are sent from this plugin to ARM-BSASLT.
