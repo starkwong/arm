@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="原始程式檔">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="標頭檔">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="資源檔">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ARM.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="ARMDlg.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgProxy.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="FileCheckListBox.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingDialog.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Plugins.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertiesFiles.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertiesGeneral.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsGeneral.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsOptions.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="XUnzip.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="XZip.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="ARM.idl">
+      <Filter>原始程式檔</Filter>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="plugins_private.h">
+      <Filter>原始程式檔</Filter>
+    </ClInclude>
+    <ClInclude Include="ARM.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="ARMDlg.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="BPCtrlAnchorMap.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgProxy.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="FileCheckListBox.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeImage.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingDialog.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="plugins.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertiesFiles.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertiesGeneral.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsGeneral.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsOptions.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="XUnzip.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="XZip.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\ARM.ico">
+      <Filter>資源檔</Filter>
+    </None>
+    <None Include="res\ARM.rc2">
+      <Filter>資源檔</Filter>
+    </None>
+    <None Include="ARM.reg" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ARM.rc">
+      <Filter>資源檔</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuildStep Include="res\ARM.manifest" />
+  </ItemGroup>
+</Project>

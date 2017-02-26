@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// いゅ (芖) resources
+// 拞崙岅 (斏懱帤丄戜榩) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
-#ifdef _WIN32
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
 #pragma code_page(950)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -48,8 +46,8 @@ BEGIN
     "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)\r\n"
     "LANGUAGE 4, 1\r\n"
     "#pragma code_page(950)\r\n"
-    "#include ""res\\ARMBSASConsole.rc2""  // 獶 Microsoft Visual C++ 絪胯筁戈方\r\n"
-    "#include ""afxres.rc""     // 夹非じン\r\n"
+    "#include ""res\\ARMBSASConsole.rc2""  // ?D Microsoft Visual C++ ?s?箁L?????\r\n"
+    "#include ""afxres.rc""     // ???????\n"
     "#endif\r\n"
     "\0"
 END
@@ -101,7 +99,7 @@ END
 // Dialog
 //
 
-IDD_CONSOLEDIALOG DIALOGEX 0, 0, 186, 95
+IDD_CONSOLEDIALOG DIALOGEX 0, 0, 362, 249
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_SYSMENU
 FONT 9, "MS Shell Dlg", 0, 0, 0x0
 BEGIN
@@ -115,19 +113,19 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_CONSOLEDIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 179
+        RIGHTMARGIN, 355
         TOPMARGIN, 7
-        BOTTOMMARGIN, 88
+        BOTTOMMARGIN, 242
     END
 END
 #endif    // APSTUDIO_INVOKED
 
-#endif    // いゅ (芖) resources
+#endif    // 拞崙岅 (斏懱帤丄戜榩) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -145,8 +143,8 @@ END
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
 LANGUAGE 4, 1
 #pragma code_page(950)
-#include "res\ARMBSASConsole.rc2"  // 獶 Microsoft Visual C++ 絪胯筁戈方
-#include "afxres.rc"     // 夹非じン
+#include "res\ARMBSASConsole.rc2"  // 旕 Microsoft Visual C++ 曇廠夁揑帒尮
+#include "afxres.rc"     // 昗弨尦審
 #endif
 
 /////////////////////////////////////////////////////////////////////////////

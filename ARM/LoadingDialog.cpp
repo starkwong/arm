@@ -16,7 +16,9 @@ TCHAR szFileINI[MAX_PATH]={0};
 TCHAR szSettingINI[MAX_PATH]={0};
 
 arfile* arFiles;
+#ifndef STANDALONE
 arfile* CLoadingDialog::currentAR;
+#endif
 
 bool CLoadingDialog::fEnumComplete;
 
@@ -28,6 +30,7 @@ CLoadingDialog::CLoadingDialog(CWnd* pParent /*=NULL*/)
 {
 }
 
+#ifndef STANDALONE
 CLoadingDialog::~CLoadingDialog()
 {
 }
@@ -179,9 +182,11 @@ INT_PTR CALLBACK NewFilesDlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM 
 	}
 	return 0;
 }
+#endif
 
 UINT CLoadingDialog::WorkerThread(LPVOID pParam)
 {
+#ifndef STANDALONE
 	WIN32_FIND_DATA FileData; 
 	HANDLE	hSearch; 
 	TCHAR	szMM2Path[MAX_PATH];
@@ -200,6 +205,7 @@ UINT CLoadingDialog::WorkerThread(LPVOID pParam)
 	TCHAR szTemp[MAX_PATH]={0};
 	list<arfile*> newlist;
 	// HANDLE hFile;
+#endif
 
 	if (!*szFileINI) {
 		GetModuleFileName(NULL,szFileINI,MAX_PATH);
@@ -210,9 +216,13 @@ UINT CLoadingDialog::WorkerThread(LPVOID pParam)
 	}
 
 	// Free if appropriate
+#ifndef STANDALONE
 	if (arFiles) FreeARFile(arFiles);
+#endif
 	arFiles=NULL;
 
+	bool bResolve=false;
+#ifndef STANDALONE
 	for (int c=0; c<2; c++) {
 		GetPrivateProfileString(SECTION_GENERAL,c==0?SETTING_MM2:SETTING_BACKUP,NULL,szDirPath,MAX_PATH,szSettingINI);
 		if (*szDirPath && GetFileAttributes(szDirPath)!=INVALID_FILE_ATTRIBUTES) {
@@ -244,7 +254,6 @@ UINT CLoadingDialog::WorkerThread(LPVOID pParam)
 
 	CARMDlg::m_LoadingDialog->SendDlgItemMessage(IDC_PROGRESS,PBM_SETRANGE,0,MAKELPARAM(0,fileCount/*-1*/));
 	CARMDlg::m_LoadingDialog->SendDlgItemMessage(IDC_PROGRESS,PBM_SETSTEP,1,0);
-	bool bResolve=false;
 
 	for (int c=0; c<2; c++) {
 		GetPrivateProfileString(SECTION_GENERAL,c==0?SETTING_MM2:SETTING_BACKUP,NULL,szDirPath,MAX_PATH,szSettingINI);
@@ -398,12 +407,15 @@ UINT CLoadingDialog::WorkerThread(LPVOID pParam)
 		}
 
 	}
+#endif
 	if (bResolve) {
 		return WorkerThread(pParam);
 	} else {
+#ifndef STANDALONE
 		if (newlist.size()) {
 			DialogBoxParam(theApp.m_hInstance,MAKEINTRESOURCE(IDD_NEWFILES),CARMDlg::m_LoadingDialog->GetSafeHwnd(),NewFilesDlgProc,(LPARAM)&newlist);
 		}
+#endif
 
 		fEnumComplete=true;
 		((CLoadingDialog*)pParam)->PostMessage(WM_CLOSE);
@@ -416,13 +428,17 @@ BOOL CLoadingDialog::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	fEnumComplete=false;
+
+#ifdef STANDALONE
+	this->ShowWindow(SW_HIDE);
+#endif
 	AfxBeginThread(WorkerThread,this);
 	return TRUE;  // 傳回 TRUE，除非您對控制項設定焦點
 }
 
+#ifndef STANDALONE
 BEGIN_MESSAGE_MAP(CLoadingDialog, CDialog)
 END_MESSAGE_MAP()
-
 
 // CLoadingDialog 訊息處理常式
 
@@ -432,3 +448,4 @@ void CLoadingDialog::OnCancel() {
 
 void CLoadingDialog::OnOK() {
 }
+#endif

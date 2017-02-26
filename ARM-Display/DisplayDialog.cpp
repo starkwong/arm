@@ -93,7 +93,7 @@ void CDisplayDialog::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct) {
 				for (int c2=0; c2<16; c2++) {
 					/*sprintf(szTemp,"OUT: (%d,%d)\n",0, m_secondScreen?(c2<m_line?c2:c2-m_line):(c2<m_line?16+c2:c2));
 					OutputDebugString(szTemp);*/
-					for (int c1=0; c1<96; c1++) {
+					for (int c1=0; c1<(this->m_engByteCount * 8); c1++) {
 						if (!dcLED->GetPixel(c1, m_secondScreen?(c2<m_line?m_line+c2+1:m_line+c2+1):(c2<(15-m_line)?16+m_line+c2+1:m_line+c2-15))) {
 							dc.SelectObject(pen);
 							dc.SelectObject(brush);
@@ -105,7 +105,7 @@ void CDisplayDialog::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct) {
 					}
 				}
 
-
+				if (hEventUpdate != INVALID_HANDLE_VALUE) SetEvent(hEventUpdate);
 				//NotifyEventHooks(hHook,NULL,(LPARAM)lpDrawItemStruct->hDC);
 			}
 
@@ -174,7 +174,7 @@ END_MESSAGE_MAP()
 
 int CDisplayDialog::GetXPad(char* text, int total) {
 	bool fNewline=false;
-	bool fDBCS=total==12;
+	bool fDBCS=total==this->m_chiByteCount;
 	char* pszNewline=NULL;
 
 	while (*text==' ') memmove(text,text+1,strlen(text));
@@ -233,7 +233,7 @@ void CDisplayDialog::CreateBuffer() {
 		CBitmap bmpN;
 		CFont font;
 		m_dcLED.CreateCompatibleDC(&dc);
-		m_outRect.right=LEDSIZE*16*6;
+		m_outRect.right=LEDSIZE*8*this->m_chiByteCount;
 		m_outRect.bottom=LEDSIZE*16;
 		bool ret=bmpN.CreateCompatibleBitmap(&m_dcLED,m_outRect.right,m_outRect.bottom*2)==TRUE;
 		GetDlgItem(IDC_OUTPUT)->MoveWindow(m_outRect.left,m_outRect.top,m_outRect.right,m_outRect.bottom,FALSE);
@@ -254,7 +254,8 @@ void CDisplayDialog::CreateBuffer() {
 
 	if (!fDBCS && !strchr(m_currenttext,'|')) y=4;
 	if (m_secondScreen) y+=16;
-	x=GetXPad(m_currenttext,fDBCS?12:16)*(fDBCS?8:6);
+	x=GetXPad(m_currenttext,fDBCS?this->m_chiByteCount:this->m_engByteCount)*(fDBCS?8:6);
+	if (!fDBCS) x += (this->m_chiByteCount * 8 - this->m_engByteCount * 6) / 2;
 
 	m_dcLED.FillSolidRect(0,m_secondScreen?16:0,m_outRect.right,m_outRect.bottom+(m_secondScreen?16:0),RGB(255,255,255));
 
@@ -277,7 +278,7 @@ void CDisplayDialog::CreateBuffer() {
 									for (int n2=0; n2<8; n2++)
 										if (b & (1<<n2))
 										//if ((unsigned char)szBits[n3*16+n] & (1<<n2))
-											m_dcLED.SetPixel(x+n3*8+n2,y+n,0);
+											m_dcLED.SetPixelV(x+n3*8+n2,y+n,0);
 								}
 						}
 					}
@@ -291,7 +292,8 @@ void CDisplayDialog::CreateBuffer() {
 			}
 		} else {
 			if (*pszRender=='|') {
-				x=GetXPad(pszRender+1,16)*(fDBCS?8:6);
+				x=GetXPad(pszRender+1,this->m_engByteCount)*(fDBCS?8:6);
+				x += (this->m_chiByteCount * 8 - this->m_engByteCount * 6) / 2;
 				y+=8;
 			} else {
 				if (m_fpSBCS)
@@ -301,7 +303,7 @@ void CDisplayDialog::CreateBuffer() {
 					for (int c3=0; c3<5; c3++)
 						for (int c2=0; c2<7; c2++)
 							if (szBits[c3] & 1 << (6-c2))
-								m_dcLED.SetPixel(x+c3,y+c2,0);
+								m_dcLED.SetPixelV(x+c3,y+c2,0);
 				}
 
 				x+=6;
@@ -315,8 +317,10 @@ void CDisplayDialog::CreateBuffer() {
 
 void CDisplayDialog::_Report() {
 	CWnd* lpOutput=GetDlgItem(IDC_OUTPUT);
+	DWORD dwTicks;
 
 	hEvent=CreateEvent(NULL,FALSE,FALSE,NULL);
+	hEventUpdate=CreateEvent(NULL,FALSE,FALSE,NULL);
 
 	while (m_queuetext.size()) {
 		LPTSTR pszText=(LPTSTR)LocalAlloc(LMEM_FIXED,m_queuetext.size()+2);
@@ -333,9 +337,14 @@ void CDisplayDialog::_Report() {
 
 			SetTimer(1,2000,NULL);
 			for (m_line=0; m_line<16; m_line++) {
+				dwTicks = GetTickCount();
 				lpOutput->Invalidate();
+				WaitForSingleObject(hEventUpdate,INFINITE);
 				if (!*m_currenttext || (*m_currenttext==' ' && m_currenttext[1]==0)) break;
-				Sleep(75);
+				dwTicks = GetTickCount() - dwTicks;
+				if (dwTicks < this->m_scrollSpeed) {
+					Sleep(this->m_scrollSpeed - dwTicks);
+				}
 			}
 			WaitForSingleObject(hEvent,INFINITE);
 
@@ -347,6 +356,8 @@ void CDisplayDialog::_Report() {
 
 	dwReportThread=0;
 	CloseHandle(hEvent);
+	CloseHandle(hEventUpdate);
+	hEventUpdate = INVALID_HANDLE_VALUE;
 }
 
 DWORD WINAPI ReportThread(LPVOID lpParameter) {
@@ -393,6 +404,11 @@ bool CDisplayDialog::Initialize(const char* file) {
 		this->m_background=szTemp;
 	} else
 		return false;
+
+	this->m_engByteCount = GETSETTINGINT("EngByteCount", 16);
+	this->m_chiByteCount = GETSETTINGINT("ChiByteCount", 12);
+	this->m_scrollSpeed = GETSETTINGINT("ScrollSpeed", 75);
+	this->hEventUpdate = INVALID_HANDLE_VALUE;
 
 	RECT rect;
 	GetWindowRect(&rect);

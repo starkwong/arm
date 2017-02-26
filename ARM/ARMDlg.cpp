@@ -23,6 +23,7 @@ map<UINT,MIRANDASERVICE,less<UINT> > CARMDlg::menuservices;
 
 // ?EApp About ®œ•Œ CAboutDlg ?E‹§Ë∂ÅE
 
+#ifndef STANDALONE
 class CAboutDlg : public CDialog
 {
 public:
@@ -30,7 +31,6 @@ public:
 
 // ?E‹§Ë∂Ù∏ÅE?
 	enum { IDD = IDD_ABOUTBOX };
-
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV §‰¥©
 
@@ -58,7 +58,7 @@ BOOL CAboutDlg::OnInitDialog() {
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 	ON_WM_DESTROY()
 END_MESSAGE_MAP()
-
+#endif
 
 // CARMDlg ?E‹§Ë∂ÅE
 
@@ -70,8 +70,12 @@ CARMDlg::CARMDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CARMDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+#ifndef STANDALONE
 	m_pAutoProxy = NULL;
+#endif
 }
+
+#ifndef STANDALONE
 CARMDlg::~CARMDlg()
 {
 	// ¶p™G¶≥¶π?E‹§Ë∂Ù™?Automation Proxy°AΩ–±N®‰?EV¶π?E‹§ÅE
@@ -86,8 +90,12 @@ void CARMDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_FILELIST, m_lstFiles);
 	DDX_Control(pDX, IDC_TAB, m_tab);
 }
+#endif
 
 BEGIN_MESSAGE_MAP(CARMDlg, CDialog)
+#ifdef STANDALONE
+	ON_WM_WINDOWPOSCHANGING()
+#else
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
@@ -105,6 +113,7 @@ BEGIN_MESSAGE_MAP(CARMDlg, CDialog)
 	ON_CLBN_CHKCHANGE(IDC_FILELIST,OnClbnChkChangeFilelist)
 	ON_STN_CLICKED(IDC_PREVIEW, OnStnDblclickPreview)
 	ON_WM_DROPFILES()
+#endif
 END_MESSAGE_MAP()
 
 // CARMDlg ∞TÆß≥B≤z±`¶°
@@ -114,6 +123,7 @@ BOOL CARMDlg::OnInitDialog()
 
 	// ±N "√ˆ?E.." •\Ø‡™˙¡[§J®t≤Œ•\Ø‡™˙ΩC
 
+#ifndef STANDALONE
 	// IDM_ABOUTBOX •≤∂∑¶b®t≤Œ©R•OΩd≥Ú§ß§§°C
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
@@ -129,6 +139,7 @@ BOOL CARMDlg::OnInitDialog()
 			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
 		}
 	}
+#endif
 
 	// ≥]©w¶π?E‹§Ë∂Ù™∫πœ•‹°C∑˙‹≥•Œµ{¶°™∫•Dµ¯µ°§£¨O?E‹§Ë∂ÙÆ…°A
 	// Æÿ¨[∑|¶€∞ ±q®∆¶πß@∑~
@@ -138,6 +149,7 @@ BOOL CARMDlg::OnInitDialog()
 	// TODO: ¶b¶π•[§J√B•~™∫?El≥]©w
 	fiBitmap=NULL;
 
+#ifndef STANDALONE
 	m_lstFiles.SetColumnWidth(200);
 
 	CRect rect;
@@ -171,9 +183,10 @@ BOOL CARMDlg::OnInitDialog()
 		m_tab.InsertItem(c-200,sRes);
 	}
 
-	LoadList();
-
 	m_lstFiles.m_popupMenuID=IDR_POPUP;
+#endif
+
+	LoadList();
 
 	char szService[MAX_PATH]="ARM\\";
 	char* pszService=szService+strlen(szService);
@@ -193,17 +206,30 @@ BOOL CARMDlg::OnInitDialog()
 	CreateServiceFunction(AS_XUNZIP_UNZIPITEM,_svcXUZUnzipItem);
 	CreateServiceFunction(AS_XUNZIP_CLOSEZIP,_svcXUZCloseZip);
 	CreateServiceFunction(AS_FREEIMAGE_LOADTOHBITMAP,_svcFILoadToHBitmap);
+	CreateServiceFunction(AS_CLOSEAPP,_svcCloseApp);
+#ifndef STANDALONE
 	hEventMM2Execute=CreateHookableEvent(AE_MM2_EXECUTE);
+#endif
 
 	m_pluginManager->Initialize();
 
 	m_pluginManager->CallModulesLoaded();
 
+#ifndef STANDALONE
 	//m_oleDropTarget.Register(GetDlgItem(IDC_FILELIST));
 	m_lstFiles.DragAcceptFiles();
+#endif
 
 	return TRUE;  // ∂«¶^ TRUE°A∞£´D±z?E±®˚“µ≥]©wµJ¬I
 }
+
+#ifdef STANDALONE
+void CARMDlg::OnWindowPosChanging(WINDOWPOS FAR* lpwndpos) 
+{
+    lpwndpos->flags &= ~SWP_SHOWWINDOW;
+	CDialog::OnWindowPosChanging(lpwndpos);
+}
+#endif
 
 int CARMDlg::_svcFILoadToHBitmap(WPARAM wParam, LPARAM lParam) {
 	// wParam: NULL, lParam: AS_FREEIMAGE_LOADTOHBITMAP_STRUCT
@@ -300,6 +326,11 @@ int CARMDlg::_svcXUZCloseZip(WPARAM wParam, LPARAM lParam) {
 	return (int)CloseZip((HZIP)wParam);
 }
 
+int CARMDlg::_svcCloseApp(WPARAM wParam, LPARAM lParam) {
+	theApp.GetMainWnd()->DestroyWindow();
+	return (int)0;
+}
+
 void CARMDlg::LoadList() {
 	TCHAR szText[MAX_PATH];
 	int c=0, c2=0;
@@ -308,6 +339,7 @@ void CARMDlg::LoadList() {
 	m_LoadingDialog->DoModal();
 	delete m_LoadingDialog;
 
+#ifndef STANDALONE
 	arfile* arFile=arFiles;
 
 	OnLbnSelchangeFilelist();
@@ -322,8 +354,10 @@ void CARMDlg::LoadList() {
 	m_status.SetPaneText(0,szText);
 
 	OnTcnSelchangeTab(NULL,NULL);
+#endif
 }
 
+#ifndef STANDALONE
 void CARMDlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
 	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
@@ -1126,3 +1160,4 @@ void CARMDlg::OnDropFiles(HDROP hDropInfo)
 	OnListMenuItems(ID_LIST_REFRESH);
 	CDialog::OnDropFiles(hDropInfo);
 }
+#endif

@@ -3,18 +3,18 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 6.00.0366 */
-/* at Tue Mar 09 21:29:18 2010
+ /* File created by MIDL compiler version 7.00.0555 */
+/* at Wed Feb 01 00:31:35 2017
  */
-/* Compiler settings for .\ARM.idl:
-    Oicf, W1, Zp8, env=Win32 (32b run)
+/* Compiler settings for ARM.idl:
+    Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
     protocol : dce , ms_ext, c_ext, robust
     error checks: allocation ref bounds_check enum stub_data 
     VC __declspec() decoration level: 
          __declspec(uuid()), __declspec(selectany), __declspec(novtable)
          DECLSPEC_UUID(), MIDL_INTERFACE()
 */
-//@@MIDL_FILE_HEADING(  )
+/* @@MIDL_FILE_HEADING(  ) */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
 
@@ -63,8 +63,6 @@ typedef struct ARM ARM;
 extern "C"{
 #endif 
 
-void * __RPC_USER MIDL_user_allocate(size_t);
-void __RPC_USER MIDL_user_free( void * ); 
 
 
 #ifndef __ARM_LIBRARY_DEFINED__
@@ -101,7 +99,8 @@ EXTERN_C const IID DIID_IARM;
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IARM * This,
             /* [in] */ REFIID riid,
-            /* [iid_is][out] */ void **ppvObject);
+            /* [annotation][iid_is][out] */ 
+            __RPC__deref_out  void **ppvObject);
         
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IARM * This);
@@ -123,7 +122,7 @@ EXTERN_C const IID DIID_IARM;
             IARM * This,
             /* [in] */ REFIID riid,
             /* [size_is][in] */ LPOLESTR *rgszNames,
-            /* [in] */ UINT cNames,
+            /* [range][in] */ UINT cNames,
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
@@ -152,26 +151,26 @@ EXTERN_C const IID DIID_IARM;
 
 
 #define IARM_QueryInterface(This,riid,ppvObject)	\
-    (This)->lpVtbl -> QueryInterface(This,riid,ppvObject)
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
 
 #define IARM_AddRef(This)	\
-    (This)->lpVtbl -> AddRef(This)
+    ( (This)->lpVtbl -> AddRef(This) ) 
 
 #define IARM_Release(This)	\
-    (This)->lpVtbl -> Release(This)
+    ( (This)->lpVtbl -> Release(This) ) 
 
 
 #define IARM_GetTypeInfoCount(This,pctinfo)	\
-    (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo)
+    ( (This)->lpVtbl -> GetTypeInfoCount(This,pctinfo) ) 
 
 #define IARM_GetTypeInfo(This,iTInfo,lcid,ppTInfo)	\
-    (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo)
+    ( (This)->lpVtbl -> GetTypeInfo(This,iTInfo,lcid,ppTInfo) ) 
 
 #define IARM_GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)	\
-    (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId)
+    ( (This)->lpVtbl -> GetIDsOfNames(This,riid,rgszNames,cNames,lcid,rgDispId) ) 
 
 #define IARM_Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)	\
-    (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr)
+    ( (This)->lpVtbl -> Invoke(This,dispIdMember,riid,lcid,wFlags,pDispParams,pVarResult,pExcepInfo,puArgErr) ) 
 
 #endif /* COBJMACROS */
 

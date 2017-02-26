@@ -132,6 +132,7 @@ long unc_size;             // may be -1 if not yet known (e.g. being streamed in
 #define AS_FREEIMAGE_GETBITS	_AS_FIPFX "GetBits"*/
 #define AS_FREEIMAGE_LOADTOHBITMAP	_AS_FIPFX "LoadToHBitmap"
 #define AE_MM2_EXECUTE			_AS_PREFIX "MM2Execute"
+#define AS_CLOSEAPP	_AS_PREFIX "CloseApp"
 
 #ifndef FREEIMAGE_H
 #define FI_ENUM(x)      enum x

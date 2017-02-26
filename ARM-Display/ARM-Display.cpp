@@ -67,7 +67,7 @@ int DisplayEvent(WPARAM wParam, LPARAM lParam) {
 			break;
 		case BSAS_EVENT_VALUE_POWER_ON:
 			// Power on
-			((CDisplayDialog*)theApp.m_pMainWnd)->UpdateDisplayText("�ССССС�");
+			((CDisplayDialog*)theApp.m_pMainWnd)->UpdateDisplayText("�ССССССС�");
 			break;
 		case BSAS_EVENT_VALUE_CONFIRMED:
 		case BSAS_EVENT_VALUE_TEXT:

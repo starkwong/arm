@@ -82,6 +82,7 @@ public:
 	static string m_route;
 	bool m_reporting;
 	int m_slotcount;
+	bool m_looping;
 	//CRITICAL_SECTION m_cs;
 	HANDLE m_dwBoot;
 };

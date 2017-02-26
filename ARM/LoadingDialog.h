@@ -2,7 +2,7 @@
 
 extern struct _arfile;
 
-// CLoadingDialog ｹ・ﾜ､雜・
+// CLoadingDialog ?Eﾜ､雜・
 
 class CLoadingDialog : public CDialog
 {
@@ -10,26 +10,37 @@ class CLoadingDialog : public CDialog
 
 public:
 	CLoadingDialog(CWnd* pParent = NULL);   // ｼﾐｷﾇｫﾘｺcｨ遖｡
+#ifndef STANDALONE
 	virtual ~CLoadingDialog();
+#endif
 
-// ｹ・ﾜ､雜・ﾆ
+// ?Eﾜ､雜・?
 	enum { IDD = IDD_LOADING };
 
 protected:
+#ifndef STANDALONE
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV ､莇ｩ
+#endif
 	virtual BOOL OnInitDialog();
 
+#ifndef STANDALONE
 	DECLARE_MESSAGE_MAP()
 public:
 	//afx_msg void OnBnClickedCancel();
 	void OnOK();
 	void OnCancel();
+#endif
 
 private:
 	static UINT WorkerThread(LPVOID pParam);
+
+#ifndef STANDALONE
 	static void MakeInfo(arfile* node);
 	static arfile* currentAR;
+#endif
 	static bool fEnumComplete;
 };
 
+#ifndef STANDALONE
 void FreeARFile(arfile* node);
+#endif

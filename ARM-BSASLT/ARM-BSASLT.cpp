@@ -113,6 +113,7 @@ CBSASCore::CBSASCore(): m_reporting(false){
 	GetModuleFileName(NULL,szPath,MAX_PATH);
 	strcpy(strrchr(szPath,'\\'),"\\Console.ini");
 	m_slotcount=GetPrivateProfileInt("General","slotcount",4,szPath);
+	m_looping = GetPrivateProfileInt("General", "looping", 0, szPath);
 	DetectATTE();
 	//InitializeCriticalSection(&m_cs);
 	m_dwBoot=CreateThread(NULL,0,Boot,NULL,0,NULL);
@@ -271,8 +272,10 @@ VOID CALLBACK ReportTimerProc(HWND hwnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTi
 }
 
 DWORD WINAPI CBSASCore::Report(void*) {
-	theCore->m_reporting=true;
 	if (timer) KillTimer(NULL,timer);
+	if (theCore == NULL) return 0;
+
+	theCore->m_reporting=true;
 
 	if (theCore->m_playphase>=3) {
 		timer=NULL;
@@ -285,9 +288,12 @@ DWORD WINAPI CBSASCore::Report(void*) {
 			theCore->m_stopinfo.voice=theCore->m_stopinfo.lastvoice;
 			theCore->m_stopinfo.lastvoice.clear();
 			NotifyEventHooks(hEventDisplay,BSAS_EVENT_VALUE_TEXT,(LPARAM)theCore->m_stopinfo.lastitems[0].text.c_str());
+		} else if (theCore->m_looping) {
+			theCore->m_playphase = 1;
 		}
-
-	} else {
+	}
+	
+	if (theCore->m_playphase >= 0 && theCore->m_playphase < 3) {
 		if (theCore->m_playphase==0) {
 			char szPath[MAX_PATH]="Routes\\Slot0\\";
 			*strrchr(szPath,'0')=theCore->m_slot+'0';

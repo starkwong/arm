@@ -13,7 +13,7 @@ class CDisplayDialog : public CDialog
 	DECLARE_DYNAMIC(CDisplayDialog)
 
 public:
-	//CDisplayDialog(CWnd* pParent = NULL);   // º–∑««Ø«Ô«µ«ƒ«Â«´«ª
+	//CDisplayDialog(CWnd* pParent = NULL);   // º–∑««Ø«ÅEµ«ƒ«Â«´«ª
 	CDisplayDialog(CWnd* pParent = NULL,char* file=NULL);
 	virtual ~CDisplayDialog();
 
@@ -59,4 +59,8 @@ private:
 	list<char*> m_sections;
 	string m_queuetext;
 	HANDLE hEvent;
+	HANDLE hEventUpdate;
+	int m_engByteCount;
+	int m_chiByteCount;
+	int m_scrollSpeed;
 };
