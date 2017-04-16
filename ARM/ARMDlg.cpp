@@ -75,15 +75,21 @@ CARMDlg::CARMDlg(CWnd* pParent /*=NULL*/)
 #endif
 }
 
-#ifndef STANDALONE
 CARMDlg::~CARMDlg()
 {
+#ifndef STANDALONE
 	// ¦pªG¦³¦¹?EÜ¤è¶ôª?Automation Proxy¡A½Ð±N¨ä?EV¦¹?EÜ¤E
 	// ¶ôªºªð¦^?EÐ³]¬° NULL¡A©Ò¥H·|ª¾¹D¬O§_¤w¸g§R°£?EÜ¤è¶ô¡C
 	if (m_pAutoProxy != NULL)
 		m_pAutoProxy->m_pDialog = NULL;
+#endif
+	if (m_pluginManager) {
+		delete m_pluginManager;
+		m_pluginManager = NULL;
+	}
 }
 
+#ifndef STANDALONE
 void CARMDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);

@@ -13,9 +13,8 @@ class CDisplayDialog : public CDialog
 	DECLARE_DYNAMIC(CDisplayDialog)
 
 public:
-	//CDisplayDialog(CWnd* pParent = NULL);   // º–∑««Ø«ÅEµ«ƒ«Â«´«ª
+	//CDisplayDialog(CWnd* pParent = NULL);   // º–∑««Ø?Eµ«ƒ«Â«´«?
 	CDisplayDialog(CWnd* pParent = NULL,char* file=NULL);
-	virtual ~CDisplayDialog();
 
 	bool Initialize(const char* file);
 	void UpdateDisplayText(const char* text);
@@ -63,4 +62,9 @@ private:
 	int m_engByteCount;
 	int m_chiByteCount;
 	int m_scrollSpeed;
+	CPen m_pen1;
+	CPen m_pen2;
+	CBrush m_brush1;
+	CBrush m_brush2;
+	LPBYTE m_pbBmp;
 };

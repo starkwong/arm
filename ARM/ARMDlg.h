@@ -29,10 +29,7 @@ class CARMDlg : public CDialog
 // 建構
 public:
 	CARMDlg(CWnd* pParent = NULL);	// 標準建構函式
-
-#ifndef STANDALONE
 	virtual ~CARMDlg();
-#endif
 
 // 對話方塊資料
 	enum { IDD = IDD_ARM_DIALOG };

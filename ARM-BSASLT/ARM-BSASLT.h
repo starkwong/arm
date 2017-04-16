@@ -83,6 +83,8 @@ public:
 	bool m_reporting;
 	int m_slotcount;
 	bool m_looping;
+	bool m_reportingEnded;
 	//CRITICAL_SECTION m_cs;
 	HANDLE m_dwBoot;
+	bool m_unloading;
 };

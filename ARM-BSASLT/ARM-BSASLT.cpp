@@ -66,6 +66,7 @@ DWORD WINAPI CBSASCore::Boot(void*) {
 	theCore->m_confirmed=false;
 	theCore->m_slot=-1;
 	theCore->m_filePointer=NULL;
+	theCore->m_reporting=false;
 	CBSASCore::timer=NULL;
 
 	NotifyEventHooks(hEventConsole,BSAS_EVENT_VALUE_POWER_ON,0);
@@ -106,7 +107,7 @@ void CBSASCore::DetectATTE() {
 	}
 }
 
-CBSASCore::CBSASCore(): m_reporting(false){
+CBSASCore::CBSASCore(): m_reporting(false), m_unloading(false) {
 	Debug(__FUNCTION__ "(): Power On\n");
 	char szPath[MAX_PATH];
 	theCore=this;
@@ -130,9 +131,11 @@ CBSASCore::~CBSASCore() {
 			Sleep(500);*/
 	}
 
-	NotifyEventHooks(hEventConsole,BSAS_EVENT_VALUE_POWER_OFF,0);
-	NotifyEventHooks(hEventDisplay,BSAS_EVENT_VALUE_POWER_OFF,0);
-	NotifyEventHooks(hEventSpeaker,BSAS_EVENT_VALUE_POWER_OFF,0);
+	if (!this->m_unloading) {
+		NotifyEventHooks(hEventConsole,BSAS_EVENT_VALUE_POWER_OFF,0);
+		NotifyEventHooks(hEventDisplay,BSAS_EVENT_VALUE_POWER_OFF,0);
+		NotifyEventHooks(hEventSpeaker,BSAS_EVENT_VALUE_POWER_OFF,0);
+	}
 
 	if (this->m_filePointer) fclose(this->m_filePointer);
 	//LeaveCriticalSection(&m_cs);
@@ -281,16 +284,22 @@ DWORD WINAPI CBSASCore::Report(void*) {
 		timer=NULL;
 		NotifyEventHooks(hEventConsole,BSAS_EVENT_VALUE_TEXT,(LPARAM)theCore->m_storedConsole);
 		theCore->m_reporting=false;
-		if (theCore->m_playphase==3 && theCore->m_stopinfo.fContinue)
-				theCore->Play();
-		else if (theCore->m_stopinfo.lastvoice.size()) {
+		if (theCore->m_playphase==3 && theCore->m_stopinfo.fContinue) {
+			theCore->m_playphase = 0;
+			theCore->Play();
+			return 0;
+		} else if (theCore->m_stopinfo.lastvoice.size()) {
 			for (int c=0; c<3; c++) theCore->m_stopinfo.items[c]=theCore->m_stopinfo.lastitems[c];
 			theCore->m_stopinfo.voice=theCore->m_stopinfo.lastvoice;
 			theCore->m_stopinfo.lastvoice.clear();
 			NotifyEventHooks(hEventDisplay,BSAS_EVENT_VALUE_TEXT,(LPARAM)theCore->m_stopinfo.lastitems[0].text.c_str());
 		} else if (theCore->m_looping) {
 			theCore->m_playphase = 1;
+			theCore->m_reportingEnded=true;
+			theCore->m_reporting=false;
 		}
+	} else if (theCore->m_reportingEnded) {
+		theCore->m_reporting=false;
 	}
 	
 	if (theCore->m_playphase >= 0 && theCore->m_playphase < 3) {
@@ -380,7 +389,10 @@ bool CBSASCore::ReadStation(LPCSTR line) {
 }
 
 int CBSASCore::Play() {
-	if (ReadStation()) CBSASCore::Report(NULL);
+	if (ReadStation()) {
+		this->m_reportingEnded = false;
+		CBSASCore::Report(NULL);
+	}
 	return 0;
 }
 
@@ -420,7 +432,7 @@ int CBSASCore::Reset() {
 #define BH_IDLE(f) m_reporting?__noop():f
 int CBSASCore::ButtonHandler(const char button) {
 	switch (button) {
-		BH_SELECT(BSASLT_CMD_D1,__noop,ChangeSlot,__noop,__noop,BH_IDLE(Reset),__noop)
+		BH_SELECT(BSASLT_CMD_D1,__noop,ChangeSlot,__noop,__noop,Reset,__noop)
 		BH_SELECT(BSASLT_CMD_D2,PreCopy,RestoreConsole,__noop,__noop,BH_IDLE(Side),__noop)
 		BH_SELECT(BSASLT_CMD_D3,PreClear,RestoreConsole,__noop,__noop,BH_IDLE(ChangeVolume),__noop)
 		BH_SELECT(BSASLT_CMD_D4,__noop,ChangeIntensity,__noop,__noop,BH_IDLE(Skip),__noop)
@@ -555,7 +567,10 @@ BOOL PluginLoad(PLUGINLINK* plink) {
 }
 
 BOOL PluginUnload() {
-	if (theCore) delete theCore;
+	if (theCore) {
+		theCore->m_unloading = true;
+		delete theCore;
+	}
 	Debug("BSAS-LT Module Unloaded\n");
 	return TRUE;
 }

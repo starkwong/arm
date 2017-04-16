@@ -35,17 +35,6 @@ CDisplayDialog::CDisplayDialog(CWnd* pParent, char* file)
 }
 
 #define SAVESETTING(a,b) WritePrivateProfileString("General",a,b,m_skinfile.c_str())
-CDisplayDialog::~CDisplayDialog()
-{
-	char szValue[MAX_PATH];
-	RECT rect;
-	OutputDebugString("CDisplayDialog: Saving position\n");
-	GetWindowRect(&rect);
-	itoa(rect.left,szValue,10);
-	SAVESETTING("DialogX",szValue);
-	itoa(rect.top,szValue,10);
-	SAVESETTING("DialogY",szValue);
-}
 
 void CDisplayDialog::DoDataExchange(CDataExchange* pDX)
 {
@@ -57,6 +46,16 @@ void CDisplayDialog::OnDestroy() {
 
 	if (m_fpSBCS) fclose(m_fpSBCS);
 	if (m_fpDBCS) fclose(m_fpDBCS);
+	if (m_pbBmp) LocalFree(m_pbBmp);
+
+	char szValue[MAX_PATH];
+	RECT rect;
+	OutputDebugString("CDisplayDialog: Saving position\n");
+	GetWindowRect(&rect);
+	itoa(rect.left,szValue,10);
+	SAVESETTING("DialogX",szValue);
+	itoa(rect.top,szValue,10);
+	SAVESETTING("DialogY",szValue);
 
 	OutputDebugString("\nCDisplayDialog Destructed\n");
 
@@ -71,17 +70,19 @@ void CDisplayDialog::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct) {
 			if (m_dcLED.m_hDC) {
 				CDC dc;
 				CDC* dcLED=&m_dcLED;// GetDlgItem(IDC_LED)->GetDC();
-				CPen pen,pen2;
-				CBrush brush,brush2;
+				// CPen pen,pen2;
+				// CBrush brush,brush2;
 				CBitmap* bmp=m_dcLED.GetCurrentBitmap();
 				CSize sz=bmp->GetBitmapDimension();
 
 				//pen.CreatePen(PS_SOLID,1,RGB(128,0,0x0));
+				/*
 				pen.CreatePen(PS_SOLID,1,RGB(0xff,0x80,0x0));
 				pen2.CreatePen(PS_SOLID,1,RGB(0x3e,0x1f,0x0));
 				//brush.CreateSolidBrush(RGB(255,0,0));
 				brush.CreateSolidBrush(RGB(0xff,0xc0,0x80));
 				brush2.CreateSolidBrush(RGB(0,0,0));
+				*/
 
 				dc.Attach(lpDrawItemStruct->hDC);
 
@@ -89,17 +90,40 @@ void CDisplayDialog::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct) {
 				//dc.FillSolidRect(0,0,300,100,0);
 
 				//char szTemp[MAX_PATH];
+				bool dim = true;
+				dc.SelectObject(m_pen2);
+				dc.SelectObject(m_brush2);
+				
+				BITMAP bitmap;
+				bmp->GetBitmap(&bitmap);
+
+				if (!m_pbBmp) {
+					m_pbBmp = (LPBYTE) LocalAlloc(LMEM_FIXED, bitmap.bmHeight * bitmap.bmWidthBytes);
+				}
+				bmp->GetBitmapBits(bitmap.bmHeight * bitmap.bmWidthBytes, m_pbBmp);
+				// 1 is dark, 0 is light
 
 				for (int c2=0; c2<16; c2++) {
 					/*sprintf(szTemp,"OUT: (%d,%d)\n",0, m_secondScreen?(c2<m_line?c2:c2-m_line):(c2<m_line?16+c2:c2));
 					OutputDebugString(szTemp);*/
+					int y = m_secondScreen?(c2<m_line?m_line+c2+1:m_line+c2+1):(c2<(15-m_line)?16+m_line+c2+1:m_line+c2-15);
+
 					for (int c1=0; c1<(this->m_engByteCount * 8); c1++) {
-						if (!dcLED->GetPixel(c1, m_secondScreen?(c2<m_line?m_line+c2+1:m_line+c2+1):(c2<(15-m_line)?16+m_line+c2+1:m_line+c2-15))) {
-							dc.SelectObject(pen);
-							dc.SelectObject(brush);
+						// if (!dcLED->GetPixel(c1, m_secondScreen?(c2<m_line?m_line+c2+1:m_line+c2+1):(c2<(15-m_line)?16+m_line+c2+1:m_line+c2-15))) {
+						int x = c1;
+						int offset = y * bitmap.bmWidthBytes + (x / 8);
+						if ((m_pbBmp[offset] & (1 << (7 - (x % 8)))) == 0) {
+							if (dim) {
+								dc.SelectObject(m_pen1);
+								dc.SelectObject(m_brush1);
+								dim = false;
+							} 
 						} else {
-							dc.SelectObject(pen2);
-							dc.SelectObject(brush2);
+							if (!dim) {
+								dc.SelectObject(m_pen2);
+								dc.SelectObject(m_brush2);
+								dim = true;
+							}
 						}
 						dc.Ellipse((c1)*LEDSIZE,c2*LEDSIZE,(c1+1)*LEDSIZE-1,(c2+1)*LEDSIZE-1);
 					}
@@ -348,7 +372,7 @@ void CDisplayDialog::_Report() {
 			}
 			WaitForSingleObject(hEvent,INFINITE);
 
-			m_secondScreen=!m_secondScreen;
+			if (this->m_chiByteCount <= 12) m_secondScreen=!m_secondScreen;
 		}
 
 		LocalFree(pszText);
@@ -409,6 +433,14 @@ bool CDisplayDialog::Initialize(const char* file) {
 	this->m_chiByteCount = GETSETTINGINT("ChiByteCount", 12);
 	this->m_scrollSpeed = GETSETTINGINT("ScrollSpeed", 75);
 	this->hEventUpdate = INVALID_HANDLE_VALUE;
+
+	this->m_pen1.CreatePen(PS_SOLID,1,RGB(0xff,0x80,0x0));
+	this->m_pen2.CreatePen(PS_SOLID,1,RGB(0x3e,0x1f,0x0));
+	//brush.CreateSolidBrush(RGB(255,0,0));
+	this->m_brush1.CreateSolidBrush(RGB(0xff,0xc0,0x80));
+	this->m_brush2.CreateSolidBrush(RGB(0,0,0));
+	this->m_pbBmp = NULL;
+
 
 	RECT rect;
 	GetWindowRect(&rect);

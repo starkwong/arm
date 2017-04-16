@@ -1,4 +1,4 @@
-// ConsoleDialog.cpp : πÍß@¿…
+// ConsoleDialog.cpp : πÅE@¿…
 //
 
 #include "stdafx.h"
@@ -12,7 +12,7 @@ typedef struct {
 	HWND hWnd;
 } PANELINFO;
 
-// CConsoleDialog πÔ∏‹§Ë∂Ù
+// CConsoleDialog πÅE‹§Ë∂ÅE
 
 IMPLEMENT_DYNAMIC(CConsoleDialog, CDialog)
 /*CConsoleDialog::CConsoleDialog(CWnd* pParent /*=NULL* /)
@@ -33,40 +33,12 @@ CConsoleDialog::CConsoleDialog(CWnd* pParent, char* file)
 }
 
 #define SAVESETTING(a,b) WritePrivateProfileString("General",a,b,m_skinfile.c_str())
+/*
 CConsoleDialog::~CConsoleDialog() {
-	map<int,CWnd*>::iterator iter;
-	list<CFont*>::iterator iter2;
-	if (m_dc) delete m_dc;
-
-	char szValue[MAX_PATH];
-	RECT rect;
-	OutputDebugString("CConsoleDialog: Saving position\n");
-	GetWindowRect(&rect);
-	itoa(rect.left,szValue,10);
-	SAVESETTING("DialogX",szValue);
-	itoa(rect.top,szValue,10);
-	SAVESETTING("DialogY",szValue);
-
-	OutputDebugString("Destroying Controls: ");
-	for (iter=m_controls.begin(); iter!=m_controls.end(); iter++) {
-		OutputDebugString("*");
-		delete (*iter).second;
-	}
-
-	OutputDebugString("\nDestroying CFont objects: ");
-	//for (iter2=m_fonts.begin(); iter2!=m_fonts.end(); iter2++) {
-	while (m_fonts.size()) {
-		OutputDebugString("*");
-		delete m_fonts.front();
-		m_fonts.pop_front();
-	}
-
-	if (m_fpSBCS) fclose(m_fpSBCS);
-
-	OutputDebugString("\nCConsoleDialog Destructed\n");
 
 //	
 }
+*/
 
 void CConsoleDialog::DoDataExchange(CDataExchange* pDX)
 {
@@ -235,7 +207,7 @@ bool CConsoleDialog::Initialize(const char* file) {
 	}
 
 	UpdateConsoleText("");
-	if (!m_fpSBCS) MessageBox("ø˘ª~°GµL™k∏¸§J sbcs.bin°A≥Ê¶r§∏≠^º∆¶r±NµL™k≈„•‹°C",NULL,MB_ICONERROR);
+	if (!m_fpSBCS) MessageBox("ø˘ª~°GµL™k∏ÅEJ sbcs.bin°A≥Ê¶r§∏≠^º∆¶r±NµL™k≈„•‹°C",NULL,MB_ICONERROR);
 	return true;
 }
 
@@ -358,6 +330,37 @@ BOOL CConsoleDialog::PreTranslateMessage(MSG* pMsg) {
 }
 
 void CConsoleDialog::OnDestroy() {
+	map<int,CWnd*>::iterator iter;
+	list<CFont*>::iterator iter2;
+	if (m_dc) delete m_dc;
+
+	char szValue[MAX_PATH];
+	RECT rect;
+	OutputDebugString("CConsoleDialog: Saving position\n");
+	GetWindowRect(&rect);
+	itoa(rect.left,szValue,10);
+	SAVESETTING("DialogX",szValue);
+	itoa(rect.top,szValue,10);
+	SAVESETTING("DialogY",szValue);
+
+	OutputDebugString("Destroying Controls: ");
+	for (iter=m_controls.begin(); iter!=m_controls.end(); iter++) {
+		OutputDebugString("*");
+		delete (*iter).second;
+	}
+
+	OutputDebugString("\nDestroying CFont objects: ");
+	//for (iter2=m_fonts.begin(); iter2!=m_fonts.end(); iter2++) {
+	while (m_fonts.size()) {
+		OutputDebugString("*");
+		delete m_fonts.front();
+		m_fonts.pop_front();
+	}
+
+	if (m_fpSBCS) fclose(m_fpSBCS);
+
+	OutputDebugString("\nCConsoleDialog Destructed\n");
+
 	CDialog::OnDestroy();
 }
 

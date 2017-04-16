@@ -15,7 +15,7 @@ class CConsoleDialog : public CDialog
 public:
 	//CConsoleDialog(CWnd* pParent = NULL);   // 標準建構函式
 	CConsoleDialog(CWnd* pParent = NULL,char* file=NULL);
-	virtual ~CConsoleDialog();
+	// virtual ~CConsoleDialog();
 
 	bool Initialize(const char* file);
 	//void OnOK();

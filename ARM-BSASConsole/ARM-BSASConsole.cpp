@@ -154,6 +154,8 @@ CARMBSASConsoleApp::~CARMBSASConsoleApp() {
 		theApp.m_pMainWnd=NULL;
 	}*/
 	//delete m_consoleDialog;
+	if (m_consoleDialog) delete m_consoleDialog;
+	m_consoleDialog = NULL;
 }
 
 // CARMBSASConsoleApp ?El³]©w

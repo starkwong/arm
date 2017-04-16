@@ -109,6 +109,8 @@ CARMDisplayApp::~CARMDisplayApp() {
 	theApp.m_pMainWnd=NULL;
 	}*/
 	//delete m_consoleDialog;
+	if (m_displayDialog) delete m_displayDialog;
+	m_displayDialog = NULL;
 }
 
 // CARMBSASConsoleApp ?El³]©w
